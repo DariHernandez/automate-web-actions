@@ -3,13 +3,14 @@
 import logging
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+from excel_read import excel_file
 
 class web_automation (): 
     """
     Class to make web automation
     """
 
-    def __init__ (self, web_page, headless, web_actions): 
+    def __init__ (self, web_page, headless, web_actions, file_name, sheet_name): 
         """
         Constructor of class
         """
@@ -24,6 +25,10 @@ class web_automation ():
         print ("Loading page: {}".format(self.__web_page))
 
         self.__browser.get (self.__web_page)
+
+        # Get data from exel file
+        my_excel_file = excel_file(file_name)
+        self.data = my_excel_file.get_data_sheet(sheet_name)
         
 
     def __get_chrome_instance (self):
@@ -59,7 +64,7 @@ class web_automation ():
         elem = self.__browser.find_element_by_css_selector (selector)
         elem.click()
 
-    def make_web_actions (self, data): 
+    def make_web_actions (self): 
         """
         Loadf page and make actions in the web page (clicks and send data), with specific data structure
         """
@@ -67,7 +72,7 @@ class web_automation ():
         print ("Processing actions on the web page: ")
 
         # Loop for each in data from excel sheet
-        for data_row in data:
+        for data_row in self.data:
 
             # Print current row for the loop
             column = list(data_row.keys()) [0]
