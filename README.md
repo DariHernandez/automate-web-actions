@@ -50,6 +50,8 @@ sheet_name = "users"
 
 headless = False
 
+proxy = True
+
 web_page = "https://www.multipleincomefunnel.com/cp1/winningwithquincy/5email"
 
 web_actions = []
@@ -63,10 +65,11 @@ my_web_automation.end_browser ()
 ```
 
 ## Variables to modify
-* **file_name**: The name of the xlsx file. All xlsx files need to be inside the "excel_files" folder.
-* **sheet_name**: Specific sheet inside the file, with the information. You would use one file with many sheets or many files with one sheet.
-* **sheet_name**: If this variable is "True", the browser will run in background (whithout visible window), else, chrome will open normally.
-* **web_page**: Full address for the web site to make web automation.
+* **file_name**: The name of the *xlsx file*. All xlsx files need to be inside the "excel_files" folder.
+* **sheet_name**: Specific *sheet inside the file*, with the information. You would use one file with many sheets or many files with one sheet.
+* **headless**: If this variable is "True", *the browser will run in background* (whithout visible window), else, chrome will open normally.
+* **proxy**: If variable is "True", the program *will to use the proxy list from file "proxy_list.txt"*; else, you can use your own vpn service. You can replice the list with your own proxy free proxy list
+* **web_page**: Full address for the *web site* to make web automation.
 
 ## Web actions
 Each one of web actions, is a specific **function to make in the browser**.

@@ -4,32 +4,59 @@ import logging
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from excel_read import excel_file
+from proxy import get_random_proxy
 
 class web_automation (): 
     """
     Class to make web automation
     """
 
-    def __init__ (self, web_page, headless, web_actions, file_name, sheet_name): 
+    def __init__ (self, web_page, headless, web_actions, file_name, sheet_name, proxy): 
         """
         Constructor of class
         """
 
         logging.disable()
 
-        self.__web_page = web_page
-        self.__headless = headless
-        self.__web_actions = web_actions
+        # Run a loop to find a functional proxy
+        while True: 
+            try: 
+                # Get proxy
+                self.proxy = get_random_proxy()
 
-        self.__browser = self.__get_chrome_instance()
-        print ("Loading page: {}".format(self.__web_page))
+                # Variables for class
+                self.__web_page = web_page
+                self.__headless = headless
+                self.__web_actions = web_actions
 
-        self.__browser.get (self.__web_page)
+                self.__browser = self.__get_chrome_instance()
+                self.__browser.set_page_load_timeout (10)
+
+                if proxy: 
+                    print ("Loading page: {}\nProxy: {}".format(self.__web_page, self.proxy))
+
+                # Load page
+                self.__browser.get (self.__web_page)
+
+                # Verify the correct load of the page
+                try: 
+                    self.__browser.find_element_by_css_selector("#reload-button")
+                except: 
+                    break
+                else:
+                    print ("Page take a lot of time to load. Trying again.")
+                    raise TimeoutError ("Page take a lot of time to load. Trying again.")
+
+            except: 
+                continue
+            else: 
+                break
+
 
         # Get data from exel file
         my_excel_file = excel_file(file_name)
         self.data = my_excel_file.get_data_sheet(sheet_name)
-        
+
 
     def __get_chrome_instance (self):
         """
@@ -44,6 +71,7 @@ class web_automation ():
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')  
         options.add_argument('--start-maximized')
+        options.add_argument('--proxy-server={}'.format(self.proxy))
 
         browser = webdriver.Chrome(ChromeDriverManager().install(), options=options)
         return browser
