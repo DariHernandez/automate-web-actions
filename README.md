@@ -19,6 +19,7 @@ Auto fill web forms with data in a excel file
 ## Modules:
 * selenium
 * webdriver_manager
+* openpyxl
 
 ## Install modules with pip
 
@@ -27,5 +28,6 @@ Open a terminal / cmd window, and run this commands:
 ``` bash
 $ pip install selenium
 $ pip install webdriver-manager
+$ pip install openpyxl
 ```
 
