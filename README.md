@@ -87,3 +87,23 @@ web_actions.append ([action, css_selector, data_column])
 * **action **:"send_data" or "click". As the name implies, they can send information to an element of the page, or click on something respectively.
 * **css selector**: Is a selector from css, to indicate a specific element in the web page. [Click here to know how to get a specific selector in google chrome](https://stackoverflow.com/questions/4500572/how-can-i-get-the-css-selector-in-chrome/45078286), or [click here to learn more about css selectors](https://www.w3schools.com/cssref/css_selectors.asp)
 * **data_column**: The name of the spreadsheet column, whose content will be written in the text field. **Only fill in case of "data_send", if a "click" is used, leave as empty string ("")**.
+
+## Timeouts
+
+The actions are **immediate**, so if after an action (send a data or click), the **web page needs time** to load a certain element, then a **waiting time must be specified**.
+
+You can use waiting times, with: 
+
+```python
+# Wait in seconds
+time.sleep (3)
+```
+
+
+The next example, **save an acction** for click an element, **wait three seconds** and after **save a second acction**: 
+
+```python
+web_actions.append (["click", "body > div > div.div-block-5 > a", ""])
+time.sleep (3)
+web_actions.append (["send_data", "#name", "first name"])
+```
