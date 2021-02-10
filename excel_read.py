@@ -3,8 +3,7 @@
 import openpyxl, os, random, pprint
 
 
-current_path = os.path.dirname (__file__)
-file_xlsx = os.path.join (current_path, "excel_files", "data base 1.xlsx")
+
 
 class excel_file (): 
     """
@@ -16,8 +15,9 @@ class excel_file ():
         Constructor of the class
         """
 
-        self.__file_xlsx = file_xlsx
-        self.__wb = openpyxl.load_workbook (file_xlsx)
+        current_path = os.path.dirname (__file__)
+        self.__file_xlsx = os.path.join (current_path, "excel_files", file_xlsx)
+        self.__wb = openpyxl.load_workbook (self.__file_xlsx)
     
 
     def get_data_sheet (self, sheet_name):
@@ -104,9 +104,5 @@ class excel_file ():
 
 
 
-        wb.save(file_xlsx)
+        wb.save(self.__file_xlsx)
         wb.close()
-
-my_excel_file = excel_file (file_xlsx)
-data = my_excel_file.get_data_sheet("users")
-pprint.pprint (data)
