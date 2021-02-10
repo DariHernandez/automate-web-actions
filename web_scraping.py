@@ -21,7 +21,7 @@ class web_automation ():
         self.__web_actions = web_actions
 
         self.__browser = self.__get_chrome_instance()
-        print ("Loading page")
+        print ("Loading page: {}".format(self.__web_page))
 
         self.__browser.get (self.__web_page)
         
@@ -89,7 +89,7 @@ class web_automation ():
             # End process in each loop
             self.__reload_browser()
 
-    def __end_browser (self):
+    def end_browser (self):
         """
         Close the current instance of chrome
         """
@@ -101,7 +101,7 @@ class web_automation ():
         Close the current instance of the web browser and reload in the same page
         """
 
-        self.__end_browser()
+        self.end_browser()
         self.__browser = self.__get_chrome_instance()
         print ("Loading page")
         self.__browser.get (self.__web_page)
