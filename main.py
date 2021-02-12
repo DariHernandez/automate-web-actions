@@ -16,7 +16,7 @@ sheet_name = "users"
 headless = False
 
 # Use the proxy list from proxy_list.txt
-proxy = True
+proxy = False
 
 # Link of the web page
 web_page = "https://www.multipleincomefunnel.com/cp1/winningwithquincy/5email" 

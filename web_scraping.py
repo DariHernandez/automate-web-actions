@@ -19,21 +19,31 @@ class web_automation ():
         logging.disable()
 
         # Run a loop to find a functional proxy
-        while True: 
+        while True:
+
             try: 
-                # Get proxy
-                self.proxy = get_random_proxy()
 
                 # Variables for class
                 self.__web_page = web_page
                 self.__headless = headless
                 self.__web_actions = web_actions
 
+                if proxy: 
+                    # Get proxy
+                    self.proxy = get_random_proxy()
+
+                    print ("Loading page: {}\nProxy: {}".format(self.__web_page, self.proxy))
+                else: 
+                    # Get proxy
+                    self.proxy = None
+
+                    print ("Loading page: {}".format(self.__web_page))
+
                 self.__browser = self.__get_chrome_instance()
                 self.__browser.set_page_load_timeout (10)
 
-                if proxy: 
-                    print ("Loading page: {}\nProxy: {}".format(self.__web_page, self.proxy))
+
+
 
                 # Load page
                 self.__browser.get (self.__web_page)
@@ -47,7 +57,8 @@ class web_automation ():
                     print ("Page take a lot of time to load. Trying again.")
                     raise TimeoutError ("Page take a lot of time to load. Trying again.")
 
-            except: 
+            except Exception as err:
+                print (err) 
                 continue
             else: 
                 break
@@ -69,9 +80,12 @@ class web_automation ():
             options.add_argument("--headless")
 
         options.add_argument('--no-sandbox')
+        options.add_argument('--disable-gpu')
         options.add_argument('--disable-dev-shm-usage')  
         options.add_argument('--start-maximized')
-        options.add_argument('--proxy-server={}'.format(self.proxy))
+
+        if self.proxy: 
+            options.add_argument('--proxy-server={}'.format(self.proxy))
 
         browser = webdriver.Chrome(ChromeDriverManager().install(), options=options)
         return browser
