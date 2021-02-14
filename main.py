@@ -26,7 +26,7 @@ web_actions = []
 
 # List of actions in order
 web_actions.append (["click", "body > div > div.div-block-5 > a", ""])
-time.sleep (3)
+time.sleep (5)
 web_actions.append (["send_data", "#name", "first name"])
 web_actions.append (["send_data", "#email", "email"])
 web_actions.append (["click", "body > div > div.popup > div:nth-child(4) > form > input.submit-button-4.w-button", ""])
@@ -47,7 +47,7 @@ sheet_name = "users"
 headless = False
 
 # Use the proxy list from proxy_list.txt
-proxy = True
+proxy = False
 
 # Link of the web page
 web_page = "https://app.clickfunnels.com/signupflow" 
@@ -74,7 +74,7 @@ file_name = "data base 1.xlsx"
 sheet_name = "users" 
 
 # Use the proxy list from proxy_list.txt
-proxy = True
+proxy = False
 
 # True or False. open web Browser en the background
 headless = False
@@ -106,7 +106,7 @@ sheet_name = "users"
 headless = False
 
 # Use the proxy list from proxy_list.txt
-proxy = True
+proxy = False
 
 # Link of the web page
 web_page = "https://membership.thehhacademy.com/subscribe" 

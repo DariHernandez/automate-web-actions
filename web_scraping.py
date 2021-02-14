@@ -43,8 +43,6 @@ class web_automation ():
                 self.__browser.set_page_load_timeout (10)
 
 
-
-
                 # Load page
                 self.__browser.get (self.__web_page)
 
@@ -83,6 +81,8 @@ class web_automation ():
         options.add_argument('--disable-gpu')
         options.add_argument('--disable-dev-shm-usage')  
         options.add_argument('--start-maximized')
+        options.add_argument('--ignore-ssl-errors=yes')
+        options.add_argument('--ignore-certificate-errors')
 
         if self.proxy: 
             options.add_argument('--proxy-server={}'.format(self.proxy))
